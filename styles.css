@@ -213,6 +213,26 @@ img { max-width: 100%; display: block; }
     background: rgba(255,255,255,0.1);
 }
 
+.nav-cta {
+    background: var(--gradient);
+    color: var(--white) !important;
+    font-weight: 600;
+    border-radius: var(--radius);
+    padding: 8px 20px;
+    margin-left: 8px;
+}
+
+.nav-cta:hover {
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+    transform: translateY(-1px);
+    background: var(--gradient);
+}
+
+.nav-cta i {
+    margin-right: 4px;
+    font-size: 0.85rem;
+}
+
 /* Botón sidebar toggle (hamburguesa izquierda) */
 .sidebar-toggle {
     display: flex;
