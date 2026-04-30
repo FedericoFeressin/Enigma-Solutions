@@ -171,21 +171,40 @@ import { ContactFormController } from './assets/js/contact-form.js'
 
     if (servicesTrack) {
       const cards = servicesTrack.querySelectorAll('.service-card')
-      const totalCards = cards.length // 7
-      const maxIndex = totalCards - 1  // recorre todas las cards individualmente
-      const AUTO_DELAY = 5000 // 5 segundos
+      const totalCards = cards.length
+      const AUTO_DELAY = 5000
       let currentIndex = 0
       let autoInterval
 
-      // Calcula el ancho de una card + gap y devuelve el offset en px
+      // Alineado con styles.css: 3 cards (>1024), 2 (≤1024), 1 (≤768)
+      function getVisibleCount() {
+        const w = window.innerWidth
+        if (w <= 768) return 1
+        if (w <= 1024) return 2
+        return 3
+      }
+
+      function getMaxIndex() {
+        return Math.max(0, totalCards - getVisibleCount())
+      }
+
       function getOffset(index) {
         const card = cards[0]
-        const gap = parseInt(getComputedStyle(servicesTrack).gap) || 24
+        if (!card || card.offsetWidth === 0) return 0
+        const gap = parseInt(getComputedStyle(servicesTrack).gap, 10) || 24
         return index * (card.offsetWidth + gap)
       }
 
-      // Mueve el track al index indicado y actualiza los dots
+      function syncDotsVisibility() {
+        const maxIdx = getMaxIndex()
+        servicesDots.forEach((dot, i) => {
+          dot.style.display = i <= maxIdx ? '' : 'none'
+          if (i > maxIdx) dot.classList.remove('active')
+        })
+      }
+
       function goToService(index) {
+        const maxIndex = getMaxIndex()
         currentIndex = Math.max(0, Math.min(index, maxIndex))
         servicesTrack.style.transform = `translateX(-${getOffset(currentIndex)}px)`
 
@@ -194,28 +213,33 @@ import { ContactFormController } from './assets/js/contact-form.js'
         })
       }
 
-      // Avanza al siguiente (loop al inicio cuando llega al final)
       function nextService() {
+        const maxIndex = getMaxIndex()
         goToService(currentIndex >= maxIndex ? 0 : currentIndex + 1)
       }
 
-      // Retrocede al anterior (loop al final cuando está al inicio)
       function prevService() {
+        const maxIndex = getMaxIndex()
         goToService(currentIndex <= 0 ? maxIndex : currentIndex - 1)
       }
 
-      // Inicia el auto-avance
       function startServicesAuto() {
+        clearInterval(autoInterval)
         autoInterval = setInterval(nextService, AUTO_DELAY)
       }
 
-      // Reinicia el auto-avance tras interacción manual
       function resetServicesAuto() {
         clearInterval(autoInterval)
         startServicesAuto()
       }
 
-      // Eventos de flechas
+      function onServicesLayout() {
+        const maxIndex = getMaxIndex()
+        if (currentIndex > maxIndex) currentIndex = maxIndex
+        syncDotsVisibility()
+        goToService(currentIndex)
+      }
+
       if (servicesPrev) {
         servicesPrev.addEventListener('click', () => {
           prevService()
@@ -229,7 +253,6 @@ import { ContactFormController } from './assets/js/contact-form.js'
         })
       }
 
-      // Eventos de dots
       servicesDots.forEach((dot, i) => {
         dot.addEventListener('click', () => {
           goToService(i)
@@ -237,13 +260,27 @@ import { ContactFormController } from './assets/js/contact-form.js'
         })
       })
 
-      // Pausa al pasar el mouse por encima
       servicesTrack.addEventListener('mouseenter', () =>
         clearInterval(autoInterval),
       )
       servicesTrack.addEventListener('mouseleave', startServicesAuto)
 
+      syncDotsVisibility()
+      goToService(0)
       startServicesAuto()
+
+      let resizeDebounce
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeDebounce)
+        resizeDebounce = setTimeout(onServicesLayout, 120)
+      })
+
+      let layoutDebounce
+      const ro = new ResizeObserver(() => {
+        clearTimeout(layoutDebounce)
+        layoutDebounce = setTimeout(onServicesLayout, 80)
+      })
+      ro.observe(servicesTrack)
     }
 
     // ─── Tilt 3D en Cards de Equipo ───────────
