@@ -47,7 +47,7 @@
     <div class="preloader" id="preloader">
         <div class="preloader-inner">
             <div class="preloader-icon">
-                <img src="./assets/imgs/enigma logo 128.svg" alt="Logo Enigma">
+                <img src="./assets/imgs/enigma logo 128.svg" alt="Logo Enigma" loading="lazy">
             </div>
             <div class="preloader-bar">
                 <div class="preloader-fill"></div>
@@ -68,7 +68,7 @@
             </button>
 
             <a href="#inicio" class="nav-logo">
-                <img src="./assets/imgs/enigma logo 32.svg" alt="">
+                <img src="./assets/imgs/enigma logo 32.svg" alt="" loading="lazy">
                 <span>Enigma<strong>Solutions</strong></span>
             </a>
 
@@ -124,14 +124,22 @@
         <div class="hero-bg">
             <!-- Imágenes de fondo por slide -->
             <div class="hero-bg-slides">
-                <div class="hero-bg-img active" style="background-image: url('assets/imgs/portada/portadauno.webp');">
-                </div>
-                <div class="hero-bg-img" style="background-image: url('assets/imgs/portada/portadados.webp');">
-                </div>
+                <picture>
+                    <source srcset="assets/imgs/portada/portadauno.webp" type="image/webp">
+                    <img src="assets/imgs/portada/portadauno.webp" alt="Hero background" fetchpriority="high"
+                        style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;">
+                </picture>
+                <picture>
+                    <source srcset="assets/imgs/portada/portadauno.webp" type="image/webp">
+                    <img src="assets/imgs/portada/portadados.webp" alt="Hero background" fetchpriority="high"
+                        style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;">
+                </picture>
 
-                <div class="hero-bg-img" style="background-image: url('./assets/imgs/portada/portadatres.webp');">
-
-                </div>
+                <picture>
+                    <source srcset="assets/imgs/portada/portadauno.webp" type="image/webp">
+                    <img src="assets/imgs/portada/portadatres.webp" alt="Hero background" fetchpriority="high"
+                        style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;">
+                </picture>
             </div>
             <div class="hero-bg-overlay"></div>
             <div class="hero-particles" id="particles"></div>
@@ -151,14 +159,14 @@
             <div class="hero-slide active" data-slide="0">
                 <div class="hero-content">
                     <span class="hero-badge reveal-up">Desarrollo Web</span>
-                    <h1 class="hero-title reveal-up" style="animation-delay:.1s">
+                    <h1 class="hero-title">
                         Soluciones Digitales<br>e <span class="gradient-text typing-target">Innovación</span>
                     </h1>
                     <p class="hero-subtitle reveal-up" style="animation-delay:.2s">
                         Desarrollo de software a medida, aplicaciones web para potenciar tu negocio
                         en la era digital.
                     </p>
-                    <div class="hero-buttons reveal-up" style="animation-delay:.3s">
+                    <div class="hero-buttons reveal-up">
                         <a href="#servicios" class="btn btn-primary">
                             <span>Descubrir Servicios</span>
                             <i class="fas fa-arrow-right"></i>
@@ -172,7 +180,7 @@
             <div class="hero-slide" data-slide="1">
                 <div class="hero-content">
                     <span class="hero-badge reveal-up">Servicios de Mantenimiento y Creación de Bases de Datos</span>
-                    <h1 class="hero-title reveal-up" style="animation-delay:.1s">
+                    <h1 class="hero-title">
                         Mantenimiento<br>y <span class="gradient-text typing-target">Creación de Bases de Datos</span>
                     </h1>
                     <p class="hero-subtitle reveal-up" style="animation-delay:.2s">
@@ -193,7 +201,7 @@
             <div class="hero-slide" data-slide="2">
                 <div class="hero-content">
                     <span class="hero-badge reveal-up">Desarrollo de Software</span>
-                    <h1 class="hero-title reveal-up" style="animation-delay:.1s">
+                    <h1 class="hero-title">
                         Creación de Aplicaciones de <span class="gradient-text typing-target"> Gran Impacto</span><br>
                     </h1>
                     <p class="hero-subtitle reveal-up" style="animation-delay:.2s">
@@ -504,8 +512,8 @@
                 <div class="team-card animate-on-scroll">
                     <div class="team-avatar">
                         <div class="avatar-placeholder">
-                            <img src="assets/imgs/img-Photo-Perfil/Image-Photo-Joaquin-Roa.webp"
-                                alt="Joaquin-Roa-Photo">
+                            <img src="assets/imgs/img-Photo-Perfil/Image-Photo-Joaquin-Roa.webp" alt="Joaquin-Roa-Photo"
+                                loading="lazy">
                         </div>
                         <div class="team-social">
                             <a href="https://www.linkedin.com/in/joaquin-ezequiel-roa-097098226/" aria-label="LinkedIn"
@@ -562,7 +570,7 @@
                     <div class="team-avatar">
                         <div class="avatar-placeholder">
                             <img src="./assets/imgs/img-Photo-Perfil/nicolassandoval.webp"
-                                alt="foto de perfil de nicolas sandoval">
+                                alt="foto de perfil de nicolas sandoval" loading="lazy">
                         </div>
                         <div class="team-social">
                             <a href="https://www.linkedin.com/in/nicolas-sandoval-4398b3259/" aria-label="LinkedIn"
@@ -580,7 +588,7 @@
                 <div class="team-card animate-on-scroll">
                     <div class="team-avatar">
                         <div class="avatar-placeholder">
-                            <img src="assets/imgs/img-Photo-Perfil/Photo-Perfil-Fede.jpeg" alt="">
+                            <img src="assets/imgs/img-Photo-Perfil/Photo-Perfil-Fede.jpeg" alt="" loading="lazy">
                         </div>
                         <div class="team-social">
                             <a href="https://www.linkedin.com/in/federico-feressin-45704331b/" aria-label="LinkedIn"
@@ -1086,7 +1094,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <a href="#inicio" class="nav-logo">
-                        <img src="./assets/imgs/enigma logo 32.svg" alt="logo enigma">
+                        <img src="./assets/imgs/enigma logo 32.svg" alt="logo enigma" loading="lazy">
                         <span>Enigma<strong>Solutions</strong></span>
                     </a>
                     <p>Desarrollamos software a medida, aplicaciones web y soluciones digitales para potenciar tu
